@@ -1,0 +1,45 @@
+.banner-container {
+    position: relative;
+    height: 400px;
+  /* Usamos una imagen de internet para que no de error 404 */
+    background: url('https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1000') center/cover no-repeat;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: hidden;
+    color: #fff9f9;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Capa oscura para legibilidad */
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.banner-content h1 {
+    font-size: 3rem;
+    color: #fff9f9;
+    text-shadow: 2px 2px 4px rgba(146, 38, 44, 0.8);
+}
+
+.banner-content p {
+    background-color: #d78231;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .banner-container {
+        height: 300px; /* Más bajo en celulares para no ocupar toda la pantalla */
+        }
+    .display-4 {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,32 @@
+.card {
+    background-color: #fff9f9;
+    border: 1px solid #f6d3d7;
+    border-radius: 15px;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #d78231;
+}
+
+.card-title {
+    color: #92262c;
+    font-weight: bold;
+}
+
+.price-tag {
+    color: #d78231;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.btn-order {
+    background-color: #98242e;
+    color: #fff9f9;
+    border: none;
+}
+
+.btn-order:hover {
+    background-color: #d78231;
+}

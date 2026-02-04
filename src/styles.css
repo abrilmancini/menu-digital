@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --color-claro: #f6d3d7;      /* Rosa muy claro / fondo */
+    --color-rojo-oscuro: #92262c; /* Rojo base */
+    --color-rojo-vibrante: #98242e;
+    --color-naranja: #d78231;    /* Destacados / botones */
+    --color-blanco-crema: #fff9f9;
+}
+
+body {
+    background-color: var(--color-blanco-crema);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

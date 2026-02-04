@@ -1,0 +1,46 @@
+/* Contenedor principal con fondo crema suave */
+.main-content {
+    margin-top: -20px; /* Sube un poco para solapar con la curva del banner */
+    padding-bottom: 50px;
+}
+
+/* Títulos de sección */
+.section-title {
+    color: #4a1d1d;
+    font-size: 1.1rem;
+}
+
+.view-more {
+    color: #d63384;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Caja de iconos (Quick Nav) */
+.icon-box {
+    background-color: white;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    color: #d63384;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 5px;
+}
+
+.small-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #4a1d1d;
+}
+
+/* Ajuste para que las listas fluyan bien */
+.product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

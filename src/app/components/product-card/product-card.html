@@ -1,0 +1,16 @@
+<div class="card h-100 shadow-sm border-0">
+    <img [src]="product.imagenUrl" class="card-img-top" [alt]="product.nombre">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+            <h5 class="card-title mb-1">{{ product.nombre }}</h5>
+            <span *ngIf="product.isHappyHour" class="badge bg-warning text-dark">HH</span>
+        </div>
+        <p class="card-text text-muted small">{{ product.descripcion }}</p>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="fw-bold fs-5">
+                {{ product.isHappyHour ? (product.precioHappyHour | currency) : (product.precio | currency) }}
+            </span>
+            <button class="btn btn-outline-primary btn-sm">Agregar</button>
+        </div>
+    </div>
+</div>

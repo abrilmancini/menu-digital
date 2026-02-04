@@ -1,0 +1,19 @@
+.quick-nav-container {
+    background-color: #f6d3d7;
+    padding: 15px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.nav-item {
+    color: #92262c;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.nav-item.active {
+    color: #d78231;
+    border-bottom: 2px solid #d78231;
+}

@@ -1,0 +1,12 @@
+<div class="container py-4">
+    <app-quick-nav [categories]="categories" (onSelect)="filterByCategory($event)"></app-quick-nav>
+
+    <div *ngFor="let cat of categories" class="mb-4">
+        <h5 class="section-title mb-3">{{ cat.nombre }}</h5>
+        <div class="row g-3">
+            <div class="col-12 col-md-6" *ngFor="let prod of getProductsByCategory(cat.id)">
+                <app-product-card [product]="prod"></app-product-card>
+            </div>
+        </div>
+    </div>
+</div>

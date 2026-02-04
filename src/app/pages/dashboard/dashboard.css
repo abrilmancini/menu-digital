@@ -1,0 +1,151 @@
+/* ====== WRAPPER ====== */
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background: #fff5f5;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* ====== SIDEBAR ====== */
+.sidebar {
+    width: 260px;
+    background: linear-gradient(180deg, #8b1e1e, #a83232);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+}
+
+/* Brand */
+.brand h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* NAV */
+.nav-menu {
+    margin-top: 40px;
+}
+
+.nav-item {
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.2s;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-item.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* USER */
+.user-info {
+    margin-top: auto;
+    font-size: 14px;
+}
+
+.avatar {
+    font-weight: bold;
+}
+
+/* ====== CONTENT ====== */
+.content {
+    margin-left: 260px;
+    padding: 30px;
+    width: 100%;
+}
+
+/* HEADER */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.btn-primary {
+    background: #d97706;
+    border: none;
+    padding: 10px 18px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* ====== CARD ====== */
+.admin-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* ====== TABLE ====== */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-table thead {
+    border-bottom: 2px solid #f1caca;
+}
+
+.custom-table th {
+    text-align: left;
+    padding: 12px;
+    color: #8b1e1e;
+}
+
+.custom-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* PRICE */
+.price {
+    color: #d97706;
+    font-weight: bold;
+}
+
+/* BADGE */
+.badge {
+    background: #f8d7da;
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+/* ACTIONS */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-edit {
+    background: #fff3cd;
+    border: 1px solid #f0ad4e;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background: #f8d7da;
+    border: 1px solid #dc3545;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}

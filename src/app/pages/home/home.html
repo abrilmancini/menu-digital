@@ -1,0 +1,59 @@
+<!-- <app-banner></app-banner>
+<div class="container px-4 main-content">
+    <div class="row text-center mb-4 quick-access">
+            <div class="col-3">
+                <div class="icon-box"><i class="bi bi-grid-fill"></i></div>
+                <span class="small-text">Menú</span>
+            </div>
+            <div class="col-3">
+                <div class="icon-box"><i class="bi bi-tag-fill"></i></div>
+                <span class="small-text">Promos</span>
+            </div>
+            <div class="col-3">
+                <div class="icon-box"><i class="bi bi-chat-left-text-fill"></i></div>
+                <span class="small-text">Pedidos</span>
+            </div>
+            <div class="col-3">
+                <div class="icon-box"><i class="bi bi-geo-alt-fill"></i></div>
+                <span class="small-text">Contacto</span>
+            </div>
+        </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold section-title">Entradas</h5>
+                    <a class="view-more">Ver Más ></a>
+                </div>
+                <div class="product-list">
+                    <app-product-card *ngFor="let p of entradas" [product]="p"></app-product-card>
+                </div>
+            <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+                <h5 class="fw-bold section-title">Platos Fuertes</h5>
+                <a class="view-more">Ver Más ></a>
+            </div>
+        <div class="product-list">
+            <app-product-card *ngFor="let p of platosFuertes" [product]="p"></app-product-card>
+        </div>
+    </div>
+</div> -->
+<app-banner [titulo]="'Menú Digital'" [subtitulo]="'Las mejores hamburguesas de la ciudad'"></app-banner>
+
+<div class="container px-4 main-content">
+    <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+        <h5 class="fw-bold section-title">Entradas</h5>
+        <a class="view-more">Ver Más ></a>
+    </div>
+    <div class="product-list row">
+        <div class="col-12 col-md-6 mb-3" *ngFor="let p of entradas">
+            <app-product-card [product]="p"></app-product-card>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+        <h5 class="fw-bold section-title">Platos Fuertes</h5>
+        <a class="view-more">Ver Más ></a>
+    </div>
+    <div class="product-list row">
+        <div class="col-12 col-md-6 mb-3" *ngFor="let p of platosFuertes">
+            <app-product-card [product]="p"></app-product-card>
+        </div>
+    </div>
+</div> 
+

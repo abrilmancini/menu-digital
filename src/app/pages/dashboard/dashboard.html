@@ -1,0 +1,52 @@
+<div class="dashboard-wrapper">
+    <aside class="sidebar">
+        <div class="brand">
+            <h2>MenuAdmin</h2>
+        </div>
+        <nav class="nav-menu">
+            <div class="nav-item active">
+                <i class="fas fa-th-large"></i> <span>Dashboard</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-utensils"></i> <span>Productos</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-tags"></i> <span>Categorías</span>
+            </div>
+        </nav>
+        <div class="user-info">
+            <div class="avatar">Admin</div>
+                <span>Dueño Local</span>
+            </div>
+    </aside>
+    <main class="content">
+        <header class="top-header">
+            <h2>Gestión de Productos</h2>
+            <button class="btn-primary">+ Nuevo Item</button>
+        </header>
+
+        <div class="admin-card">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Categoría ID</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of allProducts">
+                        <td class="product-name">{{ item.nombre }}</td>
+                        <td class="price">${{ item.precio }}</td>
+                        <td><span class="badge">{{ item.categoriaId }}</span></td>
+                        <td class="actions">
+                            <button class="btn-edit" (click)="onEdit(item)">Editar</button>
+                            <button class="btn-delete" (click)="onDelete(item.id)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
