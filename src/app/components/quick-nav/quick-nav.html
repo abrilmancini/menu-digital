@@ -1,1 +1,17 @@
-<p>quick-nav works!</p>
+<div class="quick-nav-container">
+    <button
+        type="button"
+        class="nav-item"
+        [class.active]="selectedId === null"
+        (click)="selectCategory(null)">
+        Todos
+    </button>
+    <button
+        type="button"
+        class="nav-item"
+        *ngFor="let cat of categories"
+        [class.active]="selectedId === cat.id"
+        (click)="selectCategory(cat.id)">
+        {{ cat.nombre }}
+    </button>
+</div>

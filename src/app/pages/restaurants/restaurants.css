@@ -1,0 +1,110 @@
+.restaurants {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 24px 60px;
+}
+
+.restaurants-header h1 {
+    font-family: var(--font-accent);
+    margin: 0 0 6px;
+}
+
+.restaurants-header p {
+    margin: 0 0 20px;
+    color: #7b4b4b;
+}
+
+.restaurants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.restaurant-card {
+    background: #fff9f9;
+    border-radius: 20px;
+    padding: 16px;
+    border: 1px solid rgba(146, 38, 44, 0.1);
+    box-shadow: 0 16px 26px rgba(146, 38, 44, 0.12);
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 12px;
+    align-items: center;
+}
+
+.restaurant-media {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #fde8ea 0%, #f9cbd2 55%, #f3b1bf 100%);
+    display: grid;
+    place-items: center;
+    color: var(--color-rojo-oscuro);
+    font-weight: 800;
+    font-size: 22px;
+    overflow: hidden;
+}
+
+.restaurant-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.restaurant-body h3 {
+    margin: 0 0 6px;
+    font-size: 18px;
+}
+
+.restaurant-body p {
+    margin: 0 0 12px;
+    color: #7a3c46;
+    font-size: 14px;
+}
+
+.restaurant-address {
+    margin: 0 0 12px;
+    color: #9a5b66;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.restaurant-link {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--color-rojo-vibrante);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.state {
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #fff6f7;
+    color: #7a3c46;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.state.error {
+    background: #fde7ea;
+    color: #9a2f3b;
+}
+
+@media (max-width: 640px) {
+    .restaurants {
+        padding: 18px 16px 44px;
+    }
+
+    .restaurant-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .restaurant-media {
+        margin: 0 auto;
+    }
+}

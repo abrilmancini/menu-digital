@@ -1,5 +1,5 @@
-/* Login */
-.login-page {
+/* Register */
+.register-page {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -7,8 +7,8 @@
     padding: 32px 16px;
 }
 
-.login-card {
-    width: min(420px, 92vw);
+.register-card {
+    width: min(480px, 92vw);
     background: linear-gradient(135deg, #fff7f8 0%, #fdeced 55%, #f9d8dd 100%);
     border-radius: 26px;
     padding: 30px 28px;
@@ -17,12 +17,12 @@
     animation: riseIn 0.7s ease both;
 }
 
-.login-header {
+.register-header {
     text-align: left;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
-.login-kicker {
+.register-kicker {
     font-weight: 700;
     color: var(--color-rojo-vibrante);
     text-transform: uppercase;
@@ -31,21 +31,21 @@
     margin: 0 0 6px;
 }
 
-.login-header h1 {
+.register-header h1 {
     margin: 0 0 8px;
     font-family: var(--font-accent);
     font-size: 28px;
 }
 
-.login-subtitle {
+.register-subtitle {
     margin: 0;
     color: #7a3c46;
     font-size: 14px;
 }
 
-.login-form {
+.register-form {
     display: grid;
-    gap: 16px;
+    gap: 14px;
 }
 
 .field {
@@ -79,7 +79,14 @@
     font-weight: 700;
 }
 
-.login-btn {
+.success {
+    margin: 0;
+    color: #4a7a4a;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.register-btn {
     border: none;
     border-radius: 999px;
     padding: 12px 18px;
@@ -92,13 +99,13 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.login-btn:hover {
+.register-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 14px 22px rgba(180, 58, 79, 0.45);
 }
 
-.login-footer {
-    margin-top: 20px;
+.register-footer {
+    margin-top: 18px;
     font-size: 12px;
     color: #7a3c46;
     text-align: center;
@@ -107,18 +114,18 @@
     gap: 6px;
 }
 
-.login-footer a {
+.register-footer a {
     color: var(--color-rojo-vibrante);
     text-decoration: none;
     font-weight: 700;
 }
 
 @media (max-width: 540px) {
-    .login-card {
+    .register-card {
         padding: 26px 22px;
     }
 
-    .login-header h1 {
+    .register-header h1 {
         font-size: 24px;
     }
 }

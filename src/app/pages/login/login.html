@@ -1,17 +1,26 @@
-<div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-4 shadow-sm" style="max-width: 400px; width: 100%;">
-        <h3 class="text-center mb-4">Acceso Dueños</h3>
-        <form (ngSubmit)="onLogin()">
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" name="email" [(ngModel)]="loginData.email" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Contraseña</label>
-                <input type="password" name="password" [(ngModel)]="loginData.password" class="form-control" required>
-            </div>
-            <p *ngIf="errorMessage" class="text-danger small">{{ errorMessage }}</p>
-            <button type="submit" class="btn btn-primary w-100">Entrar</button>
+<section class="login-page">
+    <div class="login-card">
+        <header class="login-header">
+            <h1>login</h1>
+            <p class="login-subtitle">Gestioná tu restaurante y actualizá el menú en minutos.</p>
+        </header>
+
+        <form class="login-form" (ngSubmit)="onLogin()">
+            <label class="field">
+                <span>Email</span>
+                <input type="email" name="email" [(ngModel)]="loginData.email" placeholder="tu@resto.com" required>
+            </label>
+            <label class="field">
+                <span>Contraseña</span>
+                <input type="password" name="password" [(ngModel)]="loginData.password" placeholder="Tu clave" required>
+            </label>
+            <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+            <button type="submit" class="login-btn">Entrar</button>
         </form>
+
+        <div class="login-footer">
+            <span>¿No tenés cuenta?</span>
+            <a routerLink="/register">Crear cuenta</a>
+        </div>
     </div>
-</div>
+</section>

@@ -1,13 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
 :root {
     --color-claro: #f6d3d7;      /* Rosa muy claro / fondo */
     --color-rojo-oscuro: #92262c; /* Rojo base */
-    --color-rojo-vibrante: #98242e;
+    --color-rojo-vibrante: #b43a4f;
     --color-naranja: #d78231;    /* Destacados / botones */
     --color-blanco-crema: #fff9f9;
+    --color-crema: #fdeced;
+    --color-sombra: rgba(146, 38, 44, 0.12);
+    --font-base: "Nunito", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    --font-accent: "Playfair Display", "Times New Roman", serif;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
-    background-color: var(--color-blanco-crema);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at 15% 10%, #ffe7ea 0%, #f9d8dd 40%, #f6d3d7 100%);
+    color: #3a2a2a;
+    font-family: var(--font-base);
+    margin: 0;
+}
+
+h1, h2, h3, h4 {
+    color: var(--color-rojo-oscuro);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+@keyframes riseIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

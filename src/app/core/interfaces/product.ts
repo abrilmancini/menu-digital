@@ -8,4 +8,5 @@ export interface Product {
     isDestacado: boolean;
     isHappyHour: boolean; // Este booleano es clave para tu lógica automática
     categoriaId: number;
+    restaurantId?: number;
 }

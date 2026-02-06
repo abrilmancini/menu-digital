@@ -1,13 +1,27 @@
 .card {
     background-color: #fff9f9;
     border: 1px solid #f6d3d7;
-    border-radius: 15px;
-    transition: transform 0.3s;
+    border-radius: 18px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 14px 24px rgba(146, 38, 44, 0.12);
+    overflow: hidden;
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .card:hover {
     transform: translateY(-5px);
     border-color: #d78231;
+    box-shadow: 0 18px 28px rgba(146, 38, 44, 0.18);
+}
+
+.card-img-top {
+    height: 170px;
+    object-fit: cover;
 }
 
 .card-title {
@@ -29,4 +43,36 @@
 
 .btn-order:hover {
     background-color: #d78231;
+}
+
+.btn-outline-primary {
+    color: #b43a4f;
+    border-color: #f2a7b3;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.btn-outline-primary:hover {
+    background-color: #b43a4f;
+    border-color: #b43a4f;
+    color: #fff;
+}
+
+.badge-wrap {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.badge-promo {
+    background: #fde7ea;
+    color: #92262c;
+    font-weight: 700;
+}
+
+.badge-hh {
+    background: #ffe6c7;
+    color: #9a5b11;
+    font-weight: 700;
 }

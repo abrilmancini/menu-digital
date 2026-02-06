@@ -1,59 +1,102 @@
-<!-- <app-banner></app-banner>
-<div class="container px-4 main-content">
-    <div class="row text-center mb-4 quick-access">
-            <div class="col-3">
-                <div class="icon-box"><i class="bi bi-grid-fill"></i></div>
-                <span class="small-text">Menú</span>
-            </div>
-            <div class="col-3">
-                <div class="icon-box"><i class="bi bi-tag-fill"></i></div>
-                <span class="small-text">Promos</span>
-            </div>
-            <div class="col-3">
-                <div class="icon-box"><i class="bi bi-chat-left-text-fill"></i></div>
-                <span class="small-text">Pedidos</span>
-            </div>
-            <div class="col-3">
-                <div class="icon-box"><i class="bi bi-geo-alt-fill"></i></div>
-                <span class="small-text">Contacto</span>
-            </div>
-        </div>
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="fw-bold section-title">Entradas</h5>
-                    <a class="view-more">Ver Más ></a>
-                </div>
-                <div class="product-list">
-                    <app-product-card *ngFor="let p of entradas" [product]="p"></app-product-card>
-                </div>
-            <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
-                <h5 class="fw-bold section-title">Platos Fuertes</h5>
-                <a class="view-more">Ver Más ></a>
-            </div>
-        <div class="product-list">
-            <app-product-card *ngFor="let p of platosFuertes" [product]="p"></app-product-card>
+<!-- TOPBAR -->
+<header class="topbar">
+    <div class="brand">Menú Digital</div>
+    <div class="topbar-actions" #menuWrap>
+        <button class="burger" type="button" aria-label="Abrir menú" (click)="toggleMenu()" [class.is-open]="isMenuOpen">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="burger-menu" [class.open]="isMenuOpen">
+            <a class="menu-link" *ngIf="!isLoggedIn" routerLink="/login" (click)="closeMenu()">Login</a>
+            <a class="menu-link" *ngIf="!isLoggedIn" routerLink="/register" (click)="closeMenu()">Crear cuenta</a>
+            <a class="menu-link" routerLink="/restaurants" (click)="closeMenu()">Restaurantes</a>
+            <a class="menu-link" *ngIf="isLoggedIn" routerLink="/dashboard" (click)="closeMenu()">Dashboard</a>
+            <button class="menu-link logout" type="button" *ngIf="isLoggedIn" (click)="logout()">Cerrar sesión</button>
         </div>
     </div>
-</div> -->
-<app-banner [titulo]="'Menú Digital'" [subtitulo]="'Las mejores hamburguesas de la ciudad'"></app-banner>
+</header>
 
-<div class="container px-4 main-content">
-    <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
-        <h5 class="fw-bold section-title">Entradas</h5>
-        <a class="view-more">Ver Más ></a>
-    </div>
-    <div class="product-list row">
-        <div class="col-12 col-md-6 mb-3" *ngFor="let p of entradas">
-            <app-product-card [product]="p"></app-product-card>
+<!-- CONTENIDO -->
+<div class="home">
+    <!-- PROMO -->
+    <section class="promo">
+        <div class="promo-text">
+            <span class="promo-badge">Especial del Día</span>
+            <h3>Burger BBQ</h3>
+            <p>Jugosa, con queso cheddar y cebolla caramelizada.</p>
+            <div class="promo-actions">
+                <span class="promo-price">$8.99</span>
+                <a class="promo-btn" routerLink="/restaurants">Ver restaurantes</a>
+            </div>
         </div>
-    </div>
-    <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
-        <h5 class="fw-bold section-title">Platos Fuertes</h5>
-        <a class="view-more">Ver Más ></a>
-    </div>
-    <div class="product-list row">
-        <div class="col-12 col-md-6 mb-3" *ngFor="let p of platosFuertes">
-            <app-product-card [product]="p"></app-product-card>
+        <div class="promo-visual">
+            <div class="promo-circle"></div>
         </div>
-    </div>
-</div> 
+    </section>
 
+    <!-- NAV RÁPIDA -->
+    <section class="quick-nav">
+        <a class="quick-item" routerLink="/restaurants">Menú</a>
+        <a class="quick-item" href="#destacados">Promociones</a>
+        <a class="quick-item" href="#happy-hour">Happy Hour</a>
+        <a class="quick-item" href="#contacto">Contacto</a>
+    </section>
+
+    <!-- DESTACADOS -->
+    <div class="section" id="destacados">
+        <div class="section-header">
+            <h3>Destacados</h3>
+            <span class="ver-mas">Ver más ></span>
+        </div>
+
+        <div class="productos">
+            <div class="producto" *ngFor="let p of destacados">
+                <app-product-card [product]="p"></app-product-card>
+            </div>
+        </div>
+        <p class="empty" *ngIf="destacados.length === 0">Todavía no hay productos destacados.</p>
+    </div>
+
+    <!-- HAPPY HOUR -->
+    <section class="happy-strip" id="happy-hour">
+        <div>
+            <h4>Happy Hour</h4>
+            <p>Todos los días de 18:00 a 20:00</p>
+        </div>
+        <a class="happy-btn" routerLink="/restaurants">Ver promos</a>
+    </section>
+
+    <!-- ENTRADAS -->
+    <div class="section">
+        <div class="section-header">
+            <h3>Entradas</h3>
+            <span class="ver-mas">Ver más ></span>
+        </div>
+
+        <div class="productos">
+            <div class="producto" *ngFor="let p of entradas">
+                <app-product-card [product]="p"></app-product-card>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLATOS FUERTES -->
+    <div class="section">
+        <div class="section-header">
+            <h3>Platos Fuertes</h3>
+            <span class="ver-mas">Ver más ></span>
+        </div>
+
+        <div class="productos">
+            <div class="producto" *ngFor="let p of platosFuertes">
+                <app-product-card [product]="p"></app-product-card>
+            </div>
+        </div>
+    </div>
+
+    <footer class="home-footer" id="contacto">
+        <h4>Contacto</h4>
+        <p>Escribinos a soporte@menudigital.com o seguinos en redes.</p>
+    </footer>
+</div>

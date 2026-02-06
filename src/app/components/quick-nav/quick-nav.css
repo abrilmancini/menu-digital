@@ -3,17 +3,25 @@
     padding: 15px;
     border-radius: 50px;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
     margin: 20px 0;
 }
 
 .nav-item {
     color: #92262c;
-    font-weight: 500;
+    font-weight: 700;
     text-decoration: none;
+    border: none;
+    background: transparent;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
 }
 
 .nav-item.active {
     color: #d78231;
-    border-bottom: 2px solid #d78231;
+    background: #fff6f7;
+    border: 1px solid #f0a9b5;
 }

@@ -1,12 +1,47 @@
 <div class="container py-4">
+    <div class="restaurant-header mb-3">
+        <div class="header-row">
+            <div>
+                <h2 class="section-title">{{ restaurantName || 'Menú del Restaurante' }}</h2>
+                <p class="header-hint">Elegí un producto para ver su detalle.</p>
+            </div>
+            <a class="back-link" routerLink="/restaurants">Volver</a>
+        </div>
+    </div>
     <app-quick-nav [categories]="categories" (onSelect)="filterByCategory($event)"></app-quick-nav>
 
-    <div *ngFor="let cat of categories" class="mb-4">
+    <section class="menu-section promo" *ngIf="destacados.length > 0">
+        <div class="section-title-row">
+            <h4>Destacados</h4>
+        </div>
+        <div class="row g-3">
+            <div class="col-12 col-md-6" *ngFor="let prod of destacados">
+                <app-product-card [product]="prod"></app-product-card>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu-section hh" *ngIf="happyHour.length > 0">
+        <div class="section-title-row">
+            <h4>Happy Hour</h4>
+        </div>
+        <div class="row g-3">
+            <div class="col-12 col-md-6" *ngFor="let prod of happyHour">
+                <app-product-card [product]="prod"></app-product-card>
+            </div>
+        </div>
+    </section>
+
+    <div *ngIf="loading" class="state">Cargando menú...</div>
+    <div *ngIf="!loading && errorMessage" class="state error">{{ errorMessage }}</div>
+
+    <div *ngFor="let cat of categories" class="mb-4" [class.hidden]="selectedCategoryId && selectedCategoryId !== cat.id">
         <h5 class="section-title mb-3">{{ cat.nombre }}</h5>
         <div class="row g-3">
             <div class="col-12 col-md-6" *ngFor="let prod of getProductsByCategory(cat.id)">
                 <app-product-card [product]="prod"></app-product-card>
             </div>
         </div>
+        <div class="empty" *ngIf="getProductsByCategory(cat.id).length === 0">No hay productos en esta categoría.</div>
     </div>
 </div>

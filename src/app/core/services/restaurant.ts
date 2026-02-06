@@ -7,7 +7,7 @@ import { Category } from '../interfaces/category';
   providedIn: 'root'
 })
 export class RestaurantService {
-  private apiUrl = 'https://localhost:7001/api/Restaurants';
+  private apiUrl = 'https://localhost:7051/api/Restaurants';
 
   constructor(private http: HttpClient) { }
 

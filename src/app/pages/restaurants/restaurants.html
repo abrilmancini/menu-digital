@@ -1,0 +1,24 @@
+<div class="restaurants">
+    <header class="restaurants-header">
+        <h1>Restaurantes</h1>
+        <p>Elegí un restaurante para ver su menú digital.</p>
+    </header>
+
+    <div *ngIf="loading" class="state">Cargando restaurantes...</div>
+    <div *ngIf="!loading && errorMessage" class="state error">{{ errorMessage }}</div>
+
+    <div class="restaurants-grid" *ngIf="!loading && !errorMessage">
+        <article class="restaurant-card" *ngFor="let r of restaurants">
+            <div class="restaurant-media">
+                <img *ngIf="r.logoUrl" [src]="r.logoUrl" [alt]="getRestaurantName(r)" />
+                <span class="restaurant-initial" *ngIf="!r.logoUrl">{{ getRestaurantName(r).charAt(0) }}</span>
+            </div>
+            <div class="restaurant-body">
+                <h3>{{ getRestaurantName(r) }}</h3>
+                <p>{{ getRestaurantDescription(r) }}</p>
+                <p class="restaurant-address" *ngIf="r.address">{{ r.address }}</p>
+                <a class="restaurant-link" [routerLink]="['/menu', getRestaurantId(r)]">Ver menú</a>
+            </div>
+        </article>
+    </div>
+</div>

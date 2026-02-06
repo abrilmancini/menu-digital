@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core'; // Agregamos Input aquí
 import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Category } from '../../core/interfaces/category';
 
 @Component({
   selector: 'app-quick-nav',
@@ -9,6 +10,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./quick-nav.css']
 })
 export class QuickNavComponent {
-  // Esta línea ahora funcionará sin el subrayado rojo
-  @Input() categories: any[] = []; 
+  @Input() categories: Category[] = [];
+  @Output() onSelect = new EventEmitter<number | null>();
+  selectedId: number | null = null;
+
+  selectCategory(categoryId: number | null): void {
+    this.selectedId = categoryId;
+    this.onSelect.emit(categoryId);
+  }
 }

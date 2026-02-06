@@ -1,0 +1,41 @@
+<section class="register-page">
+    <div class="register-card">
+        <header class="register-header">
+            <p class="register-kicker">Menu Digital</p>
+            <h1>Crear cuenta</h1>
+            <p class="register-subtitle">Registrá tu restaurante y empezá a gestionar el menú.</p>
+        </header>
+
+        <form class="register-form" (ngSubmit)="onRegister()">
+            <label class="field">
+                <span>Nombre del restaurante</span>
+                <input type="text" name="restaurantName" [(ngModel)]="formData.restaurantName" placeholder="La Trattoria" required>
+            </label>
+            <label class="field">
+                <span>Email</span>
+                <input type="email" name="email" [(ngModel)]="formData.email" placeholder="tu@resto.com" required>
+            </label>
+            <label class="field">
+                <span>Contraseña</span>
+                <input type="password" name="password" [(ngModel)]="formData.password" placeholder="Tu clave" required>
+            </label>
+            <label class="field">
+                <span>Dirección (opcional)</span>
+                <input type="text" name="address" [(ngModel)]="formData.address" placeholder="Av. Siempre Viva 123">
+            </label>
+            <label class="field">
+                <span>Teléfono (opcional)</span>
+                <input type="text" name="phone" [(ngModel)]="formData.phone" placeholder="+54 11 1234 5678">
+            </label>
+
+            <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+            <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+            <button type="submit" class="register-btn">Crear cuenta</button>
+        </form>
+
+        <div class="register-footer">
+            <span>¿Ya tenés cuenta?</span>
+            <a routerLink="/login">Iniciar sesión</a>
+        </div>
+    </div>
+</section>

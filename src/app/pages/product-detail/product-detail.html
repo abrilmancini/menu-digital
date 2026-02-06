@@ -1,0 +1,31 @@
+<section class="detail-page">
+    <div class="detail-card" *ngIf="!loading && product">
+        <div class="detail-media">
+            <img [src]="product.imagenUrl" [alt]="product.nombre">
+            <div class="badge-stack">
+                <span class="badge promo" *ngIf="product.isDestacado">Destacado</span>
+                <span class="badge hh" *ngIf="product.isHappyHour">Happy Hour</span>
+            </div>
+        </div>
+
+        <div class="detail-body">
+            <h1>{{ product.nombre }}</h1>
+            <p class="detail-desc">{{ product.descripcion }}</p>
+
+            <div class="price-row">
+                <span class="price">
+                    {{ product.isHappyHour ? (product.precioHappyHour | currency) : (product.precio | currency) }}
+                </span>
+                <span class="price-note" *ngIf="product.isHappyHour">Precio Happy Hour</span>
+            </div>
+
+            <div class="detail-actions">
+                <button type="button" class="primary-btn">Agregar</button>
+                <a class="secondary-btn" routerLink="/restaurants">Volver al menú</a>
+            </div>
+        </div>
+    </div>
+
+    <p class="state" *ngIf="loading">Cargando producto...</p>
+    <p class="state error" *ngIf="!loading && errorMessage">{{ errorMessage }}</p>
+</section>
