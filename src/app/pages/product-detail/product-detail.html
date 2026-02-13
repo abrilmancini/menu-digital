@@ -1,7 +1,7 @@
 <section class="detail-page">
     <div class="detail-card" *ngIf="!loading && product">
         <div class="detail-media">
-            <img [src]="product.imagenUrl" [alt]="product.nombre">
+            <img [src]="product.imagenUrl || fallbackImage" [alt]="product.nombre" (error)="onImageError($event)">
             <div class="badge-stack">
                 <span class="badge promo" *ngIf="product.isDestacado">Destacado</span>
                 <span class="badge hh" *ngIf="product.isHappyHour">Happy Hour</span>

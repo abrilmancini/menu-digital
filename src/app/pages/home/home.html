@@ -1,4 +1,4 @@
-<!-- TOPBAR -->
+﻿<!-- TOPBAR -->
 <header class="topbar">
     <div class="brand">Menú Digital</div>
     <div class="topbar-actions" #menuWrap>
@@ -66,34 +66,6 @@
         </div>
         <a class="happy-btn" routerLink="/restaurants">Ver promos</a>
     </section>
-
-    <!-- ENTRADAS -->
-    <div class="section">
-        <div class="section-header">
-            <h3>Entradas</h3>
-            <span class="ver-mas">Ver más ></span>
-        </div>
-
-        <div class="productos">
-            <div class="producto" *ngFor="let p of entradas">
-                <app-product-card [product]="p"></app-product-card>
-            </div>
-        </div>
-    </div>
-
-    <!-- PLATOS FUERTES -->
-    <div class="section">
-        <div class="section-header">
-            <h3>Platos Fuertes</h3>
-            <span class="ver-mas">Ver más ></span>
-        </div>
-
-        <div class="productos">
-            <div class="producto" *ngFor="let p of platosFuertes">
-                <app-product-card [product]="p"></app-product-card>
-            </div>
-        </div>
-    </div>
 
     <footer class="home-footer" id="contacto">
         <h4>Contacto</h4>

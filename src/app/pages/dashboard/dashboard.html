@@ -1,52 +1,244 @@
 <div class="dashboard-wrapper">
-    <aside class="sidebar">
-        <div class="brand">
-            <h2>MenuAdmin</h2>
-        </div>
-        <nav class="nav-menu">
-            <div class="nav-item active">
-                <i class="fas fa-th-large"></i> <span>Dashboard</span>
-            </div>
-            <div class="nav-item">
-                <i class="fas fa-utensils"></i> <span>Productos</span>
-            </div>
-            <div class="nav-item">
-                <i class="fas fa-tags"></i> <span>Categorías</span>
-            </div>
-        </nav>
-        <div class="user-info">
-            <div class="avatar">Admin</div>
-                <span>Dueño Local</span>
-            </div>
-    </aside>
-    <main class="content">
-        <header class="top-header">
-            <h2>Gestión de Productos</h2>
-            <button class="btn-primary">+ Nuevo Item</button>
-        </header>
+  <aside class="sidebar">
+    <div class="brand">
+      <h2>MenuAdmin</h2>
+    </div>
+    <nav class="nav-menu">
+      <div class="nav-item active">
+        <span>Dashboard</span>
+      </div>
+      <div class="nav-item">
+        <span>Productos</span>
+      </div>
+      <div class="nav-item">
+        <span>Categorias</span>
+      </div>
+    </nav>
+    <div class="user-info">
+      <div class="avatar">Admin</div>
+      <span>Dueno Local</span>
+      <button class="btn-logout" (click)="onLogout()">Cerrar sesion</button>
+    </div>
+  </aside>
 
-        <div class="admin-card">
-            <table class="custom-table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th>Categoría ID</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of allProducts">
-                        <td class="product-name">{{ item.nombre }}</td>
-                        <td class="price">${{ item.precio }}</td>
-                        <td><span class="badge">{{ item.categoriaId }}</span></td>
-                        <td class="actions">
-                            <button class="btn-edit" (click)="onEdit(item)">Editar</button>
-                            <button class="btn-delete" (click)="onDelete(item.id)">Eliminar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+  <main class="content">
+    <header class="top-bar">
+      <h1>MenuAdmin</h1>
+    </header>
+
+    <section class="page-header">
+      <div>
+        <h2>Gestion de Productos</h2>
+        <p class="subtitle">Administra menu, categorias y <strong>destacados</strong>.</p>
+      </div>
+      <button class="btn-primary" (click)="openCreateModal()">+ Nuevo Item</button>
+    </section>
+
+    <section class="stats-row">
+      <article class="stat-card stat-products">
+        <div class="stat-icon">&#127860;</div>
+        <div>
+          <p>Productos</p>
+          <h3>{{ filteredProducts.length }}</h3>
         </div>
-    </main>
+      </article>
+      <article class="stat-card stat-categories">
+        <div class="stat-icon">&#128193;</div>
+        <div>
+          <p>Categorias</p>
+          <h3>{{ categories.length }}</h3>
+        </div>
+      </article>
+      <article class="stat-card stat-featured">
+        <div class="stat-icon">&#11088;</div>
+        <div>
+          <p>Destacados</p>
+          <h3>{{ featuredCount }}</h3>
+        </div>
+      </article>
+      <article class="stat-card stat-happy">
+        <div class="stat-icon">&#129346;</div>
+        <div>
+          <p>Happy Hour</p>
+          <h3>{{ happyHourCount }}</h3>
+        </div>
+      </article>
+    </section>
+
+    <section class="filters-card">
+      <div class="filters-grid">
+        <div class="filter-item">
+          <label>Restaurante</label>
+          <select [(ngModel)]="selectedRestaurantId" (change)="onRestaurantChange()" [disabled]="ownerRestaurantId !== null">
+            <option [ngValue]="null">Todos</option>
+            <option *ngFor="let r of restaurants" [ngValue]="r.id">
+              {{ r.nombre || r.name || ('Restaurante ' + r.id) }}
+            </option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label>Categoria</label>
+          <select [(ngModel)]="selectedCategoryId" (change)="onFiltersChange()">
+            <option [ngValue]="null">Todas</option>
+            <option *ngFor="let c of categories" [ngValue]="c.id">{{ c.nombre }}</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label>Buscar</label>
+          <input type="text" placeholder="Nombre o descripcion" [(ngModel)]="searchTerm" (input)="onFiltersChange()" />
+        </div>
+        <div class="filter-actions">
+          <a class="public-link" [routerLink]="getPublicMenuRoute()">Ver Menu Publico→</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="admin-card categories-card">
+      <div class="table-meta">
+        <span>Categorias</span>
+          <span class="muted" *ngIf="selectedRestaurantId">Restaurante seleccionado</span>
+        </div>
+      <div class="category-tools">
+        <input
+          type="text"
+          placeholder="Nueva categoria"
+          [(ngModel)]="newCategoryName"
+          [disabled]="!selectedRestaurantId || isSavingCategory"
+        />
+        <button class="btn-edit" (click)="onCreateCategory()" [disabled]="!selectedRestaurantId || isSavingCategory">
+          Agregar
+        </button>
+      </div>
+      <div class="state" *ngIf="!selectedRestaurantId">Selecciona un restaurante para gestionar categorias.</div>
+      <div class="state" *ngIf="selectedRestaurantId && categories.length === 0">No hay categorias.</div>
+      <div class="category-list" *ngIf="selectedRestaurantId && categories.length > 0">
+        <div class="category-chip" *ngFor="let c of categories">
+          <span>{{ c.nombre }}</span>
+          <button class="chip-delete" (click)="onDeleteCategory(c.id)" [disabled]="isSavingCategory">×</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="admin-card">
+      <div class="table-meta">
+        <div>
+          <span>Total: {{ filteredProducts.length }}</span>
+          <span class="divider">|</span>
+          <span>Mostrando {{ pagedProducts.length }} de {{ filteredProducts.length }}</span>
+        </div>
+        <div class="page-size">
+          <label>Items por pagina</label>
+          <select [(ngModel)]="pageSize" (change)="onFiltersChange()">
+            <option [ngValue]="5">5</option>
+            <option [ngValue]="10">10</option>
+            <option [ngValue]="20">20</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="state" *ngIf="isLoading">Cargando productos...</div>
+      <div class="state" *ngIf="!isLoading && filteredProducts.length === 0">No hay productos.</div>
+
+      <table class="custom-table" *ngIf="!isLoading && filteredProducts.length > 0">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Categoria</th>
+            <th>Restaurante</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of pagedProducts">
+            <td class="product-name">{{ item.nombre }}</td>
+            <td class="price">${{ item.precio }}</td>
+            <td><span class="badge">{{ getCategoryName(item.categoriaId) }}</span></td>
+            <td><span class="badge">{{ getRestaurantName(item.restaurantId) }}</span></td>
+            <td><span class="status"><span class="dot"></span>Activo</span></td>
+            <td class="actions">
+              <button class="btn-edit" (click)="openEditModal(item)" [disabled]="isSaving || deletingProductId === item.id">Editar</button>
+              <button class="btn-view" [routerLink]="['/product', item.id]" [class.btn-disabled]="isSaving || deletingProductId === item.id">Ver</button>
+              <button class="btn-delete" (click)="onDelete(item.id)" [disabled]="isSaving || deletingProductId === item.id">
+                {{ deletingProductId === item.id ? 'Eliminando...' : 'Eliminar' }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="pagination" *ngIf="totalPages > 1">
+        <button (click)="goToPage(pageIndex - 1)" [disabled]="pageIndex === 1">Anterior</button>
+        <span>Pagina {{ pageIndex }} de {{ totalPages }}</span>
+        <button (click)="goToPage(pageIndex + 1)" [disabled]="pageIndex === totalPages">Siguiente</button>
+      </div>
+    </section>
+
+    <section class="empty-card" *ngIf="!isLoading && filteredProducts.length === 0">
+      <div class="empty-icon">&#128161;</div>
+      <p>Este restaurante todavia no tiene productos cargados.</p>
+    </section>
+
+    <div class="messages">
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    </div>
+  </main>
 </div>
+
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-card">
+    <header>
+      <h3 *ngIf="modalMode === 'create'">Nuevo item</h3>
+      <h3 *ngIf="modalMode === 'edit'">Editar item</h3>
+      <button class="modal-close" (click)="closeModal()">�</button>
+    </header>
+
+    <div class="modal-body">
+      <div class="form-grid">
+        <input type="text" placeholder="Nombre" [(ngModel)]="modalItem.nombre" />
+        <input type="number" placeholder="Precio" [(ngModel)]="modalItem.precio" />
+        <input type="number" placeholder="Precio Happy Hour" [(ngModel)]="modalItem.precioHappyHour" />
+        <div class="image-upload-field">
+          <input type="file" accept="image/*" (change)="onImageFileSelected($event)" />
+          <small *ngIf="selectedImageName">{{ selectedImageName }}</small>
+          <small *ngIf="isReadingImage">Procesando imagen...</small>
+        </div>
+        <input type="text" placeholder="Descripcion" [(ngModel)]="modalItem.descripcion" />
+        <select [(ngModel)]="modalItem.categoriaId" (change)="onModalCategoryChange()">
+          <option [ngValue]="0">Categoria</option>
+          <option *ngFor="let c of categories" [ngValue]="c.id">{{ c.nombre }}</option>
+        </select>
+        <select [(ngModel)]="modalItem.restaurantId" [disabled]="true">
+          <option [ngValue]="0">Restaurante</option>
+          <option *ngFor="let r of restaurants" [ngValue]="r.id">{{ r.nombre || r.name || ('Restaurante ' + r.id) }}</option>
+        </select>
+        <label class="checkbox">
+          <input type="checkbox" [(ngModel)]="modalItem.isDestacado" /> Destacado
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" [(ngModel)]="modalItem.isHappyHour" /> Happy Hour
+        </label>
+      </div>
+      <img *ngIf="modalItem.imagenUrl" [src]="modalItem.imagenUrl" class="modal-image-preview" alt="Preview de imagen" />
+      <p class="modal-field-error" *ngIf="modalErrors['nombre']">{{ modalErrors['nombre'] }}</p>
+      <p class="modal-field-error" *ngIf="modalErrors['precio']">{{ modalErrors['precio'] }}</p>
+      <p class="modal-field-error" *ngIf="modalErrors['categoriaId']">{{ modalErrors['categoriaId'] }}</p>
+      <p class="modal-field-error" *ngIf="modalErrors['restaurantId']">{{ modalErrors['restaurantId'] }}</p>
+      <p class="modal-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <p class="modal-hint" *ngIf="categories.length === 0">No hay categor�as cargadas para asignar.</p>
+    </div>
+
+    <footer>
+      <button class="btn-secondary" (click)="closeModal()" [disabled]="isSaving">Cancelar</button>
+      <button class="btn-primary" (click)="modalMode === 'create' ? onSaveCreate() : onSaveEdit()" [disabled]="isSaving || isReadingImage">
+        {{ isReadingImage ? 'Procesando imagen...' : (isSaving ? 'Guardando...' : (modalMode === 'create' ? 'Crear' : 'Guardar')) }}
+      </button>
+    </footer>
+  </div>
+</div>
+
+
+
+

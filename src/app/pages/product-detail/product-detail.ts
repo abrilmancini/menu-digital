@@ -15,6 +15,8 @@ export class ProductDetailComponent implements OnInit {
   product: Product | null = null;
   loading = true;
   errorMessage = '';
+  fallbackImage =
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Crect width='100%25' height='100%25' fill='%23f9e8ea'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2392262c' font-size='28' font-family='Arial'%3ESin imagen%3C/text%3E%3C/svg%3E";
 
   constructor(private route: ActivatedRoute, private productService: ProductService) {}
 
@@ -35,12 +37,10 @@ export class ProductDetailComponent implements OnInit {
     this.loading = true;
     this.errorMessage = '';
 
-    this.productService.getProducts().subscribe({
-      next: (products) => {
-        this.product = products.find((p) => p.id === id) ?? null;
-        if (!this.product) {
-          this.errorMessage = 'Producto no encontrado.';
-        }
+    this.productService.getProductById(id).subscribe({
+      next: (product) => {
+        this.product = product ?? null;
+        if (!this.product) this.errorMessage = 'Producto no encontrado.';
         this.loading = false;
       },
       error: () => {
@@ -48,5 +48,10 @@ export class ProductDetailComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  onImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = this.fallbackImage;
   }
 }

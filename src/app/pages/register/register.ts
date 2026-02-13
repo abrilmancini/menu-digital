@@ -41,16 +41,8 @@ export class RegisterComponent {
 
     const payload = {
       name: restaurantName,
-      nombre: restaurantName,
-      restaurantName,
       email,
-      Email: email,
-      password,
-      Password: password,
-      address: this.formData.address?.trim(),
-      Address: this.formData.address?.trim(),
-      phone: this.formData.phone?.trim(),
-      Phone: this.formData.phone?.trim()
+      passwordHash: password
     };
 
     this.authservice.register(payload).subscribe({

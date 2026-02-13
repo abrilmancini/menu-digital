@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Necesario para formularios
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { Authservice } from '../../core/services/authservice';
@@ -14,7 +14,7 @@ import { Authservice } from '../../core/services/authservice';
 })
 export class LoginComponent {
   loginData = { email: '', password: '' };
-  errorMessage: string = '';
+  errorMessage = '';
 
   constructor(private authservice: Authservice, private router: Router) {}
 
@@ -23,15 +23,13 @@ export class LoginComponent {
     const password = this.loginData.password;
 
     if (!email || !password) {
-      this.errorMessage = 'Completá email y contraseña.';
+      this.errorMessage = 'Completa email y contrasena.';
       return;
     }
 
     const payload = {
       email,
-      password,
-      Email: email,
-      Password: password
+      password
     };
 
     this.authservice.login(payload).subscribe({
@@ -42,8 +40,16 @@ export class LoginComponent {
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
+        if (err?.status === 0) {
+          this.errorMessage = 'No se pudo conectar con el backend. Verifica que la API este levantada.';
+          return;
+        }
+        if (err?.status === 401) {
+          this.errorMessage = 'Credenciales incorrectas. Verifica tu email y clave.';
+          return;
+        }
         const apiMessage = err?.error?.message || err?.error?.title;
-        this.errorMessage = apiMessage || 'Credenciales incorrectas. Verificá tu email y clave.';
+        this.errorMessage = apiMessage || 'No se pudo iniciar sesion.';
       }
     });
   }

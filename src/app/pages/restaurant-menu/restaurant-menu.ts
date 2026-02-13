@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { ProductService } from '../../core/services/productservice';
@@ -27,6 +27,7 @@ export class RestaurantMenuComponent implements OnInit {
   loading = true;
   errorMessage = '';
   private restaurantId = 1;
+  destacadoIndex = 0;
 
   constructor(
     private productService: ProductService,
@@ -46,12 +47,11 @@ export class RestaurantMenuComponent implements OnInit {
     this.loading = true;
     this.errorMessage = '';
 
-    this.productService.getProducts().subscribe({
+    this.productService.getByRestaurant(this.restaurantId).subscribe({
       next: (products) => {
-        this.products = products.filter((p) =>
-          typeof p.restaurantId === 'number' ? p.restaurantId === this.restaurantId : true
-        );
+        this.products = products ?? [];
         this.destacados = this.products.filter((p) => p.isDestacado);
+        this.destacadoIndex = 0;
         this.happyHour = this.products.filter((p) => p.isHappyHour);
         this.loading = false;
       },
@@ -82,6 +82,46 @@ export class RestaurantMenuComponent implements OnInit {
     });
   }
 
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.clampDestacadoIndex();
+  }
+
+  get destacadosVisibleCount(): number {
+    return window.innerWidth <= 860 ? 1 : 2;
+  }
+
+  get destacadosWindow(): Product[] {
+    const size = this.destacadosVisibleCount;
+    return this.destacados.slice(this.destacadoIndex, this.destacadoIndex + size);
+  }
+
+  get canMoveDestacadosPrev(): boolean {
+    return this.destacadoIndex > 0;
+  }
+
+  get canMoveDestacadosNext(): boolean {
+    const size = this.destacadosVisibleCount;
+    return this.destacadoIndex + size < this.destacados.length;
+  }
+
+  prevDestacados(): void {
+    if (!this.canMoveDestacadosPrev) return;
+    this.destacadoIndex = Math.max(0, this.destacadoIndex - 1);
+  }
+
+  nextDestacados(): void {
+    if (!this.canMoveDestacadosNext) return;
+    this.destacadoIndex = this.destacadoIndex + 1;
+  }
+
+  private clampDestacadoIndex(): void {
+    const max = Math.max(0, this.destacados.length - this.destacadosVisibleCount);
+    if (this.destacadoIndex > max) {
+      this.destacadoIndex = max;
+    }
+  }
   getProductsByCategory(categoryId: number): Product[] {
     const list = this.products.filter(p => p.categoriaId === categoryId);
     if (this.selectedCategoryId === null || this.selectedCategoryId === categoryId) {
@@ -94,3 +134,4 @@ export class RestaurantMenuComponent implements OnInit {
     this.selectedCategoryId = categoryId;
   }
 }
+

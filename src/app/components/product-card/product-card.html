@@ -1,21 +1,26 @@
 <a class="card-link" [routerLink]="['/product', product.id]">
-<div class="card h-100 shadow-sm border-0">
-    <img [src]="product.imagenUrl" class="card-img-top" [alt]="product.nombre">
-    <div class="card-body">
-        <div class="d-flex justify-content-between align-items-start">
-            <h5 class="card-title mb-1">{{ product.nombre }}</h5>
-            <div class="badge-wrap">
-                <span *ngIf="product.isDestacado" class="badge badge-promo">Destacado</span>
-                <span *ngIf="product.isHappyHour" class="badge badge-hh">HH</span>
-            </div>
+  <article class="menu-card">
+    <img
+      [src]="product.imagenUrl || ''"
+      class="menu-card-img"
+      [alt]="product.nombre || 'Producto'"
+      (error)="onImageError($event)"
+    />
+    <div class="menu-card-body">
+      <div class="menu-card-head">
+        <h5 class="menu-card-title">{{ product.nombre }}</h5>
+        <div class="badge-wrap">
+          <span *ngIf="product.isDestacado" class="badge badge-promo">Destacado</span>
+          <span *ngIf="product.isHappyHour" class="badge badge-hh">HH</span>
         </div>
-        <p class="card-text text-muted small">{{ product.descripcion }}</p>
-        <div class="d-flex justify-content-between align-items-center mt-3">
-            <span class="fw-bold fs-5">
-                {{ product.isHappyHour ? (product.precioHappyHour | currency) : (product.precio | currency) }}
-            </span>
-            <button class="btn btn-outline-primary btn-sm">Agregar</button>
-        </div>
+      </div>
+      <p class="menu-card-text">{{ product.descripcion || 'Sin descripcion.' }}</p>
+      <div class="menu-card-footer">
+        <span class="price-tag">
+          {{ product.isHappyHour ? (product.precioHappyHour | currency) : (product.precio | currency) }}
+        </span>
+        <span class="btn-order">Ver detalle</span>
+      </div>
     </div>
-</div>
+  </article>
 </a>
